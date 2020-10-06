@@ -56,6 +56,14 @@ class _HomeState extends State<Home> {
     euroController.text = (euro * this.euro / dolar).toStringAsFixed(2);
   }
 
+  void _resetFields() {
+    setState(() {
+      euroController.text = "";
+      realController.text = "";
+      dolarController.text = "";
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,6 +72,9 @@ class _HomeState extends State<Home> {
         title: Text("Conversor de Moedas"),
         backgroundColor: Colors.amber,
         centerTitle: true,
+        actions: [
+          IconButton(icon: Icon(Icons.refresh), onPressed: _resetFields)
+        ],
       ),
       body: FutureBuilder<Map>(
         future: getData(),
