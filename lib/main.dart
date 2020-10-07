@@ -33,6 +33,10 @@ class _HomeState extends State<Home> {
 
   double dolar;
   double euro;
+  double ibovespa;
+  double nasdaq;
+  double cac;
+  double ibovespaVariation;
 
   final realController = TextEditingController();
   final dolarController = TextEditingController();
@@ -102,6 +106,9 @@ class _HomeState extends State<Home> {
                 } else {
                   dolar = snapshot.data['results']['currencies']['USD']['buy'];
                   euro = snapshot.data['results']['currencies']['EUR']['buy'];
+                  ibovespa = snapshot.data['results']['stocks']['IBOVESPA']['points'];
+                  ibovespaVariation = snapshot.data['results']['stocks']['IBOVESPA']['variation'];
+                  nasdaq = snapshot.data['results']['stocks']['NASDAQ']['points'];
 
                   return 
                       SingleChildScrollView(
@@ -110,11 +117,16 @@ class _HomeState extends State<Home> {
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
                               Icon(Icons.monetization_on, size: 100.0, color: Colors.amber,),
-                              buildTextField('Reais', 'R\$', realController, _realChanges),
+                              buildTextField('Real', 'R\$', realController, _realChanges),
                               Divider(),
                               buildTextField('Dólar', 'US\$', dolarController, _dolarChanges),
                               Divider(),
                               buildTextField('Euro', 'Eur', euroController, _euroChanges ),
+                              Divider(),
+                              Text('Ibovespa: $ibovespa', style: TextStyle(color: Colors.blueAccent, fontSize: 20.0)),
+                              Text('Ibovespa Hoje: $ibovespaVariation', style: TextStyle(color: Colors.blueAccent, fontSize: 20.0)),
+                              Text('NASDAQ: $nasdaq', style: TextStyle(color: Colors.blueAccent, fontSize: 20.0)),
+
                             ],
                           ),            
                       );
